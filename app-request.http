@@ -1,0 +1,25 @@
+## boot api ##
+
+### findAll
+GET http://localhost:8080/api/findAll
+
+### insert
+POST http://localhost:8080/api/insert
+Content-Type: application/json
+
+{
+  "id": 3,
+  "name": "charger",
+  "description": "good charger",
+  "quantity": 1,
+  "price": 1000.00
+}
+
+### matchAll
+GET http://localhost:8080/api/matchAll
+
+### matchAllProducts
+GET http://localhost:8080/api/matchAllProducts
+
+### matchAllProductsWithFiledName
+GET http://localhost:8080/api/matchAllProducts/mobile

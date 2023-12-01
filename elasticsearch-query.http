@@ -1,0 +1,63 @@
+## elasticsearch api ##
+
+### search all
+GET http://localhost:9200/_search
+
+### search index
+GET http://localhost:9200/products
+
+### hit the product by id
+GET http://localhost:9200/products/_doc/1
+
+### search all the product
+GET http://localhost:9200/products/_search
+
+### match-query
+GET http://localhost:9200/products/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match":{
+      "id": 2
+    }
+  }
+}
+
+### match-query (wild-card)
+GET http://localhost:9200/products/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "wildcard":{
+      "name": "l*"
+    }
+  }
+}
+
+### matchAll-query
+GET http://localhost:9200/products/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match_all": {
+
+    }
+  }
+}
+
+### match-field-query
+GET http://localhost:9200/products/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match": {
+      "name": {
+        "query": "mobile"
+      }
+    }
+  }
+}
