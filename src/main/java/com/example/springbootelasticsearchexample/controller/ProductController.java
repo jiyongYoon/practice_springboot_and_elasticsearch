@@ -44,29 +44,30 @@ public class ProductController {
     public List<Product> matchAllProducts() throws IOException {
         SearchResponse<Product> searchResponse = elasticSearchService.matchAllProductsServices();
 
-        List<Hit<Product>> listOfHits = searchResponse.hits().hits();
-        List<Product> listOfProducts = new ArrayList<>();
-        for (Hit<Product> listOfHit : listOfHits) {
-            listOfProducts.add(listOfHit.source());
-        }
-        System.out.println(listOfProducts);
-        /*
-        [
-            Product(id=1, name=mobile, description=good phone, quantity=1, price=200000.0),
-            Product(id=2, name=laptop, description=good laptop, quantity=1, price=600000.0),
-            Product(id=3, name=charger, description=good charger, quantity=1, price=1000.0)
-        ]
-        */
-        return listOfProducts;
+        return getListOfHitsFromSearchResponse(searchResponse);
     }
 
     @GetMapping("/matchAllProducts/{fieldValue}")
     public List<Product> matchAllProductsWithName(@PathVariable String fieldValue) throws IOException {
         SearchResponse<Product> searchResponse = elasticSearchService.matchProductsWithName(fieldValue);
 
-        List<Hit<Product>> listOfHits = searchResponse.hits().hits();
-        List<Product> listOfProducts = new ArrayList<>();
-        for (Hit<Product> listOfHit : listOfHits) {
+        return getListOfHitsFromSearchResponse(searchResponse);
+    }
+
+    @GetMapping("/bool")
+    public List<Product> boolWithNameAndPriceRange(@RequestParam String fieldValue,
+                                                   @RequestParam Integer lt,
+                                                   @RequestParam Integer gt) throws IOException {
+        SearchResponse<Product> searchResponse =
+                elasticSearchService.boolQueryWithNameAndPrice(fieldValue, lt, gt);
+
+        return getListOfHitsFromSearchResponse(searchResponse);
+    }
+
+    private static <T> List<T> getListOfHitsFromSearchResponse(SearchResponse<T> searchResponse) {
+        List<Hit<T>> listOfHits = searchResponse.hits().hits();
+        List<T> listOfProducts = new ArrayList<>();
+        for (Hit<T> listOfHit : listOfHits) {
             listOfProducts.add(listOfHit.source());
         }
         System.out.println(listOfProducts);

@@ -8,11 +8,11 @@ POST http://localhost:8080/api/insert
 Content-Type: application/json
 
 {
-  "id": 3,
-  "name": "charger",
-  "description": "good charger",
+  "id": 4,
+  "name": "phone charger",
+  "description": "good phone charger",
   "quantity": 1,
-  "price": 1000.00
+  "price": 1500.00
 }
 
 ### matchAll
@@ -23,3 +23,6 @@ GET http://localhost:8080/api/matchAllProducts
 
 ### matchAllProductsWithFiledName
 GET http://localhost:8080/api/matchAllProducts/mobile
+
+### boolWithNameAndPriceRange
+GET http://localhost:8080/api/bool?fieldValue=charger&lt=5000&gt=900

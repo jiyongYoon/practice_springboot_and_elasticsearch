@@ -19,7 +19,7 @@ Content-Type: application/json
 {
   "query": {
     "match":{
-      "id": 2
+      "name": "phone"
     }
   }
 }
@@ -58,6 +58,36 @@ Content-Type: application/json
       "name": {
         "query": "mobile"
       }
+    }
+  }
+}
+
+### bool-query
+GET http://localhost:9200/products/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "bool":{
+      "filter":[
+        {
+          "term":{
+            "name":{
+              "value":"charger"
+            }
+          }
+        }
+      ],
+      "must":[
+        {
+          "range":{
+            "price":{
+              "gt":1000,
+              "lt":5000
+            }
+          }
+        }
+      ]
     }
   }
 }

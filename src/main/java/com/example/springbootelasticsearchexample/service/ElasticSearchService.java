@@ -38,4 +38,11 @@ public class ElasticSearchService {
                 elasticsearchClient.search(s -> s.index("products").query(supplier.get()), Product.class);
         return searchResponse;
     }
+
+    public SearchResponse<Product> boolQueryWithNameAndPrice(String fieldValue, Integer lt, Integer gt) throws IOException {
+        Supplier<Query> supplier = ElasticSearchUtil.boolQuerySupplier(fieldValue, lt, gt);
+        SearchResponse<Product> searchResponse =
+                elasticsearchClient.search(s -> s.index("products").query(supplier.get()), Product.class);
+        return searchResponse;
+    }
 }
