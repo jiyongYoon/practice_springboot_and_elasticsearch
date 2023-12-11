@@ -1,0 +1,11 @@
+{
+  "properties": {
+    "id": {
+      "type": "long"
+    },
+    "categoryName": {
+      "type": "text",
+      "analyzer": "nori"
+    }
+  }
+}
